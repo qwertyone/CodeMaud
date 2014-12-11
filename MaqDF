@@ -1,0 +1,22 @@
+#Maq API
+library(jsonlite)
+library(RJSONIO)
+##retrieve medical device data for company
+con="https://api.fda.gov/device/event.json?search=manufacturer_g1_name=maquet&limit=99&skip="
+query=paste(con,"0",sep="")
+JSON = readLines(query)
+data_JSON = jsonlite::fromJSON(JSON)
+
+##extract and create data frame
+data = data_JSON[[2]]
+
+##retrieve all rows associated with request and merge
+for(n in 1:155)
+{
+  n=1
+  skip=n+n*99
+  query=paste(con,skip,sep="")
+  JSON = readLines(query)
+  data_JSON = jsonlite::fromJSON(JSON)
+  data = merge(data,data_JSON[[2]])
+}
