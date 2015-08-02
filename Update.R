@@ -1,6 +1,6 @@
 ##initiate packages
-library(rvest)
-library(XML)
+library("rvest")
+library("XML")
 library("selectr")
 
 ##begin update of URLs and files to download
