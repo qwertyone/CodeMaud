@@ -9,7 +9,7 @@ listFiles <- getHTMLLinks(url, externalOnly = TRUE)
 listFiles <- listFiles[31:84]
 
 ##begin download and extraction of zip files and save file as csv
-for file in listFiles:
+for file in listFiles {
   dir = "D:/MAUDE"
   setwd(dir)
   temp = tempfile()
@@ -22,7 +22,7 @@ for file in listFiles:
   dir = "D:/MAUDE/RawData"
   setwd(dir)
   write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
-
+}
 
 
 ##clean data for organizational level dataframe
