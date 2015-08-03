@@ -22,7 +22,7 @@ for (file in listFiles) {
   ##set directory for saving data prior to cleaning
   n <- paste("D:/MAUDE/RawData/",fileName,sep="")
   n <- paste(n,".csv",sep="")
-  write.csv(data, file = n, sep = "\t", col.names = TRUE, row.names=NULL)
+  write.table(data, file = n, sep = "\t", col.names = TRUE)
 }
 
 ##clean data for organizational level dataframe
