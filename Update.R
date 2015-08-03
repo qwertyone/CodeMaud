@@ -14,7 +14,7 @@ for (file in listFiles) {
   setwd(dir)
   temp = tempfile()
   download.file(file,temp)
-  data <- read.csv(unzip(temp), header=TRUE)
+  data <- read.csv(unzip(temp), header=TRUE, fill=TRUE)
   unlink(temp)
   ##retrieve file name
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
@@ -22,7 +22,7 @@ for (file in listFiles) {
   ##set directory for saving data prior to cleaning
   n <- paste("D:/MAUDE/RawData/",fileName,sep="")
   n <- paste(n,".csv",sep="")
-  write.table(data, file = n, sep = "\t", row.names=TRUE, col.names = TRUE)
+  write.table(data, file = n, sep = "/b", col.names = TRUE)
 }
 
 ##clean data for organizational level dataframe
