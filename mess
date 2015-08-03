@@ -1,0 +1,21 @@
+ ##to clean MAUDE DOI dataset for RA. creates 3 row table for merging into new dataset.
+ install.packages(c("dplyr","tidyr","stringr"))
+ ##download raw data from MAUDE
+  library(dplyr)
+  
+  table <- read.table("foitext2010.txt",header=FALSE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+  ##subset to relevant columns for organization
+  newTable <-subset(table, select = c(1,2,6))
+  rm(table)
+  ##convert data into appropriate classes
+  newTable[,c(1:2)] <- as.integer(unlist(newTable[,c(1:2)]))
+  newTable[,3] <- as.character(unlist(newTable[,3]))
+  ##compare col [,1[,3]] values and returning only unique values
+  tableClean<-newTable[!duplicated(newTable[,c(1,3)]),]
+  rm(newTable)
+  ##create 4 rows |MDR|report|Event Summary|Manufacturer's Response
+  library(tidyr)
+  tableSummaries <- aggregate(.~ V1, data=tableClean, FUN=function(x) paste(sort(x), collapse=","))
+  colnames(tableSummaries) <- c("Key_Event", "Number_Report", "Summaries")
+  write.table(tableSummaries, file="updatedSUMMARIES.txt", quote = FALSE, sep ="|")
+  
