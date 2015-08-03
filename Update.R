@@ -15,7 +15,7 @@ for (file in listFiles) {
   temp = tempfile()
   download.file(file,temp)
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
-  data <- read.table(unz(temp, fileName))
+  data <- read.csv(unzip(temp), header=TRUE)
   unlink(temp)
   fileName = fileName(".zip","",fileName)
   ##retrieve file name
@@ -23,8 +23,5 @@ for (file in listFiles) {
   setwd(dir)
   write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
 }
-##what worked
-data <- unzip(temp)
-data1 <-read.csv(data, header=TRUE)
 
 ##clean data for organizational level dataframe
