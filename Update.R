@@ -16,10 +16,12 @@ for file in listFiles:
   download.file(file,temp)
   data <- read.table(unz(temp, file))
   unlink(temp)
+  fileName = file[sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)]
+  fileName = fileName[sub(".zip","",fileName)]
   ##retrieve file name
   dir = "D:/MAUDE/RawData"
   setwd(dir)
-  write.csv(data, file, sep = "\t", row.names = FALSE, col.names = TRUE)
+  write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
 
 
 
