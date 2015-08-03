@@ -34,10 +34,19 @@ rm(table)
 colnames(newTable) <- c("Key_Device_Event","Key_MDRReport", "Flag_Implant", "Name_Brand", "Name_Generic", "Name_Manufacturer", "Number_Model", "Number_Catalog", "Number_Serial", "Device_Availability")
 write.table(newTable, file="updatedFOIDEV.txt", quote = FALSE, sep ="|")
 rm(list = ls())
+rm(list = ls())
+tableMDRFOI<- read.table("updatedMDRFOI.txt",header=TRUE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+tableFOIDEV<- read.table("updatedFOIDEV.txt",header=TRUE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+tableINDUSTRY <- merge(tableMDRFOI, tableFOIDEV, by=c("Key_MDRReport","Key_Event"),all=TRUE)
+write.table(tableINDUSTRY, file="tableINDUSTRY.txt", quote = FALSE, sep ="|")
+tableINDUSTRY <-read.table("tableINDUSTRY.txt",header=TRUE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+tableSUMMARIES<- read.table("updatedSUMMARIES.txt",header=TRUE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+tableINDUSTRY2 <- merge(tableINDUSTRY, tableSUMMARIES, by="Key_Event",all=TRUE)
+write.table(tableINDUSTRY2, file="tableINDUSTRY2.txt", quote = FALSE, sep ="|")
+tableMAQUET <-subset(tableINDUSTRY, select = c(1,2,6))
 
 
 
 
-  
   
   
