@@ -18,4 +18,26 @@
   tableSummaries <- aggregate(.~ V1, data=tableClean, FUN=function(x) paste(sort(x), collapse=","))
   colnames(tableSummaries) <- c("Key_Event", "Number_Report", "Summaries")
   write.table(tableSummaries, file="updatedSUMMARIES.txt", quote = FALSE, sep ="|")
+  ##organize MDRFOI.txt
+  rm(list = ls())
+  table <- read.table("mdrfoi.txt",header=FALSE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+  ##subset to relevant columns for organization
+  newTable <-subset(table, select = c(1:3,6:7,9:14,25,26,29,32,72,73,75))
+  rm(table)
+  colnames(newTable)<-c("Key_MDRReport", "Key_Event", "Number_Report", "Number_DevicesInvolved", "Number_PatientsInvolved", "Flag_AdverseEvent", "Flag_ProductProblem", "Date_Report[B4]", "Date_Event[B3]","Flag_SingleUse","Code_Reporter_Occupation", "Report_Type","Date_Report[F8]", "Event_Location", "Name_Manufacturer","Action_Remediation", "Previous_Use", "Event_Type")
+write.table(newTable, file="updatedMDRFOI.txt", quote = FALSE, sep ="|")
+##organize MDRDDEVXXXX.txt
+rm(list = ls())
+table <- read.table("foidev2010.txt",header=FALSE,sep = "|", fill=TRUE, quote="", stringsAsFactors=FALSE)
+newTable <-subset(table, select = c(1:3,7,8,9,19,21,22,24))
+rm(table)
+colnames(newTable) <- c("Key_Device_Event","Key_MDRReport", "Flag_Implant", "Name_Brand", "Name_Generic", "Name_Manufacturer", "Number_Model", "Number_Catalog", "Number_Serial", "Device_Availability")
+write.table(newTable, file="updatedFOIDEV.txt", quote = FALSE, sep ="|")
+rm(list = ls())
+
+
+
+
+  
+  
   
