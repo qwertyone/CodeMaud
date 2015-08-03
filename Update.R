@@ -14,7 +14,7 @@ for (file in listFiles) {
   #setwd(dir)
   temp = tempfile()
   download.file(file,temp)
-  data <- read.csv(unzip(temp), header=TRUE, fill=TRUE, quote="", stringsAsFactors=FALSE)
+  data <- read.table(unzip(temp), header=TRUE, fill=TRUE, quote="", sep = "|", stringsAsFactors=FALSE)
   unlink(temp)
   ##retrieve file name
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
