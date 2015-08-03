@@ -23,6 +23,8 @@ for (file in listFiles) {
   setwd(dir)
   write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
 }
-
+##what worked
+data <- unzip(temp)
+data1 <-read.csv(data, header=TRUE)
 
 ##clean data for organizational level dataframe
