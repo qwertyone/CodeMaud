@@ -20,9 +20,9 @@ for (file in listFiles) {
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
   fileName = sub(".zip","",fileName)
   ##set directory for saving data prior to cleaning
-  dir = "D:/MAUDE/RawData/"
-  setwd(dir)
-  write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
+  n <- paste("D:/MAUDE/RawData/",fileName,sep="")
+  n <- paste(n,".csv",sep="")
+  write.csv(data, filename = n, sep = "\t", row.names = FALSE, col.names = TRUE)
 }
 
 ##clean data for organizational level dataframe
