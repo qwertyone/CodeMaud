@@ -11,7 +11,7 @@ listFiles <- listFiles[31:84]
 ##begin download and extraction of zip files and save file as csv
 for (file in listFiles) {
   dir = tempdir()
-  setwd(dir)
+  #setwd(dir)
   temp = tempfile()
   download.file(file,temp)
   data <- read.csv(unzip(temp), header=TRUE, fill=TRUE)
