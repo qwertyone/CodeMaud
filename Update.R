@@ -17,7 +17,7 @@ for (file in listFiles) {
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
   data <- read.csv(unzip(temp), header=TRUE)
   unlink(temp)
-  fileName = fileName(".zip","",fileName)
+  fileName = sub(".zip","",fileName)
   ##retrieve file name
   dir = "D:/MAUDE/RawData"
   setwd(dir)
