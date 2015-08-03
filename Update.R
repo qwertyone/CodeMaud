@@ -10,16 +10,17 @@ listFiles <- listFiles[31:84]
 
 ##begin download and extraction of zip files and save file as csv
 for (file in listFiles) {
-  dir = "D:/MAUDE"
+  dir = tempdir()
   setwd(dir)
   temp = tempfile()
   download.file(file,temp)
-  fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
   data <- read.csv(unzip(temp), header=TRUE)
   unlink(temp)
-  fileName = sub(".zip","",fileName)
   ##retrieve file name
-  dir = "D:/MAUDE/RawData"
+  fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
+  fileName = sub(".zip","",fileName)
+  ##set directory for saving data prior to cleaning
+  dir = "D:/MAUDE/RawData/"
   setwd(dir)
   write.csv(data, filename = fileName, sep = "\t", row.names = FALSE, col.names = TRUE)
 }
