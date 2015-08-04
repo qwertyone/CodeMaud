@@ -22,7 +22,7 @@ for (file in listFiles) {
   ##set directory for saving data prior to cleaning
   n <- paste("D:/MAUDE/RawData/",fileName,sep="")
   n <- paste(n,".csv",sep="")
-  write.table(data, file = n, sep = "/b", col.names = TRUE)
+  write.table(data, file = n, sep = "|", col.names = TRUE)
 }
 
 ###!!L!!!!e!!!!!!!!being revised !!N!!!!Broken code below!!G!!o
@@ -30,19 +30,19 @@ wd = "D:/MAUDE/RawData/"
 setwd(wd)
 library(plyr)
 ##return names in working directory (wd) that match string. Create complete database.
-file_list <- list.files(wd,"foidev")
-data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
-write.table(data, "complete_foidev.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+#file_list <- list.files(wd,"foidev")
+#data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+#write.table(data, "complete_foidev.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ###########################
 file_list <- list.files(wd,"mdrfoi")
-data2<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
-write.table(data, "complete_mdrfoi.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+write.table(data, "D:/MAUDE/RawData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ############
-#rm(list=ls())
+rm(list=ls())
 #df1<-read.table("complete_mdrfoi.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE, head=TRUE)
-library(data.table)
+#library(data.table)
 #df1<-df1[grep("", "Manufacturer", ignore.case = TRUE)]
 #df2<-read.table("complete_foidev.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE)
-data<-merge(data1,data2,by="MDR_Report_Key", all=TRUE)
-write.table(data, "maqquery1.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+#data<-merge(data1,data2,by="MDR_Report_Key", all=TRUE)
+#write.table(data, "maqquery1.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ##clean data for organizational level dataframe
