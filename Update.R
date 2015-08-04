@@ -16,7 +16,7 @@ for (file in listFiles) {
   download.file(file,temp)
   data <- read.table(unzip(temp), header=TRUE, fill=TRUE, quote="", sep = "|", stringsAsFactors=FALSE)
   unlink(temp)
-  ##retrieve file name
+  ##use pattern matching to remove URLs and suffixes from table links
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
   fileName = sub(".zip","",fileName)
   ##set directory for saving data prior to cleaning
@@ -25,4 +25,23 @@ for (file in listFiles) {
   write.table(data, file = n, sep = "/b", col.names = TRUE)
 }
 
+wd = "D:/MAUDE/RawData/"
+setwd(wd)
+library(plyr)
+##return names in working directory (wd) that match string. Create complete database.
+file_list <- list.files(wd,"foidev")
+data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+write.table(data, "complete_foidev.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+###########################
+file_list <- list.files(wd,"mdrfoi")
+data2<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+write.table(data, "complete_mdrfoi.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+############
+#rm(list=ls())
+#df1<-read.table("complete_mdrfoi.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE, head=TRUE)
+library(data.table)
+#df1<-df1[grep("", "Manufacturer", ignore.case = TRUE)]
+#df2<-read.table("complete_foidev.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE)
+data<-merge(data1,data2,by="MDR_Report_Key", all=TRUE)
+write.table(data, "maqquery1.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ##clean data for organizational level dataframe
