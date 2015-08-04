@@ -25,6 +25,7 @@ for (file in listFiles) {
   write.table(data, file = n, sep = "/b", col.names = TRUE)
 }
 
+###!!L!!!!e!!!!!!!!being revised !!N!!!!Broken code below!!G!!o
 wd = "D:/MAUDE/RawData/"
 setwd(wd)
 library(plyr)
