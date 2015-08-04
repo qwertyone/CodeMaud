@@ -36,7 +36,7 @@ library(plyr)
 ###########################
 file_list <- list.files(wd,"mdrfoi")
 data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
-write.table(data, "D:/MAUDE/RawData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+write.table(data, "D:/MAUDE/CleanedData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ############
 rm(list=ls())
 #df1<-read.table("complete_mdrfoi.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE, head=TRUE)
