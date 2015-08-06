@@ -14,7 +14,7 @@ for (file in listFiles) {
   #setwd(dir)
   temp = tempfile()
   download.file(file,temp)
-  data <- read.table(unzip(temp), header=TRUE, fill=TRUE, quote="", sep = "|", stringsAsFactors=FALSE)
+  data <- read.table(unzip(temp), fill=TRUE, quote="", sep = "|", stringsAsFactors=FALSE)
   unlink(temp)
   ##use pattern matching to remove URLs and suffixes from table links
   fileName = sub("http://www.accessdata.fda.gov/MAUDE/ftparea/","",file)
@@ -22,7 +22,7 @@ for (file in listFiles) {
   ##set directory for saving data prior to cleaning
   n <- paste("D:/MAUDE/RawData/",fileName,sep="")
   n <- paste(n,".txt",sep="")
-  write.table(data, file = n, sep = "|", col.names = TRUE)
+  write.table(data, file = n, sep = "|")
 }
 
 ###Begin file merge of independent databases
@@ -32,8 +32,8 @@ library(plyr)
 nameFiles <- "mdrfoi"
 listFiles<- list.files(wd,nameFiles)
 ##Merge files sharing same string
-data<-ldply(listFiles,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
-write.table(data, "D:/MAUDE/CleanedData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+data<-ldply(listFiles,read.table, sep="|", head=FALSE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+write.table(data, "D:/MAUDE/CleanedData/mdrfoi_complete.txt", row.names=FALSE, col.names=FALSE, sep="|",quote=FALSE)
 ############
 rm(list=ls())
 ##return names in working directory (wd) that match string. Create complete database.
