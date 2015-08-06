@@ -25,20 +25,23 @@ for (file in listFiles) {
   write.table(data, file = n, sep = "|", col.names = TRUE)
 }
 
-###!!L!!!!e!!!!!!!!being revised !!N!!!!Broken code below!!G!!o
+###Begin file merge of independent databases
 wd = "D:/MAUDE/RawData/"
 setwd(wd)
 library(plyr)
+nameFiles <- "mdrfoi"
+listFiles<- list.files(wd,nameFiles)
+##Merge files sharing same string
+data<-ldply(listFiles,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
+write.table(data, "D:/MAUDE/CleanedData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
+############
+rm(list=ls())
 ##return names in working directory (wd) that match string. Create complete database.
 #file_list <- list.files(wd,"foidev")
 #data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
 #write.table(data, "complete_foidev.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
 ###########################
-file_list <- list.files(wd,"mdrfoi")
-data<-ldply(file_list,read.table, sep="|", head=TRUE, fill=TRUE,stringsAsFactors=FALSE, na.strings=FALSE)
-write.table(data, "D:/MAUDE/CleanedData/mdrfoi_complete.txt", row.names=FALSE, col.names=TRUE, sep="|",quote=FALSE)
-############
-rm(list=ls())
+
 #df1<-read.table("complete_mdrfoi.txt", row.names=NULL,fill=TRUE, sep="|", quote="", stringsAsFactors=FALSE, head=TRUE)
 #library(data.table)
 #df1<-df1[grep("", "Manufacturer", ignore.case = TRUE)]
