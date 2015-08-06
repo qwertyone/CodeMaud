@@ -21,7 +21,7 @@ for (file in listFiles) {
   fileName = sub(".zip","",fileName)
   ##set directory for saving data prior to cleaning
   n <- paste("D:/MAUDE/RawData/",fileName,sep="")
-  n <- paste(n,".csv",sep="")
+  n <- paste(n,".txt",sep="")
   write.table(data, file = n, sep = "|", col.names = TRUE)
 }
 
